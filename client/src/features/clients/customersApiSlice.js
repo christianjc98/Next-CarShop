@@ -4,7 +4,9 @@ import { setCustomers } from "./customersSlice";
 export const customersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllCustomers: builder.query({
-      query: (page) => `/customer?page=${page}&sort=a-z`,
+      query: ({ page, search }) => ({
+        url: `/customer?page=${page}&sort=a-z&search=${search}`,
+      }),
       providesTags: ["Customers"],
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
@@ -37,4 +39,5 @@ export const {
   useGetAllCustomersQuery,
   useAddCustomerMutation,
   useDeleteCustomerMutation,
+  useLazyGetAllCustomersQuery,
 } = customersApiSlice;
