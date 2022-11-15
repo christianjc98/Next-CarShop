@@ -29,9 +29,14 @@ const addClient = async (req, res) => {
 };
 
 const getCustomers = async (req, res) => {
-  const { sort } = req.query;
+  const { sort, search } = req.query;
+  let queryObject = {};
 
-  let result = Customer.find({});
+  if (search) {
+    queryObject.name = { $regex: search, $options: "i" };
+  }
+
+  let result = Customer.find(queryObject);
 
   if (sort === "a-z") {
     result.sort("name");
@@ -46,7 +51,7 @@ const getCustomers = async (req, res) => {
 
   const customers = await result;
 
-  const totalCustomers = await Customer.countDocuments();
+  const totalCustomers = await Customer.countDocuments(queryObject);
   const numOfPages = Math.ceil(totalCustomers / limit);
 
   res.status(StatusCodes.OK).json({ customers, totalCustomers, numOfPages });

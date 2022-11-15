@@ -8,6 +8,7 @@ const customersSlice = createSlice({
     numOfPages: null,
     totalCustomers: null,
     customerToModify: null,
+    customerSearch: "",
   },
   reducers: {
     setCustomers: (state, action) => {
@@ -17,14 +18,17 @@ const customersSlice = createSlice({
       state.totalCustomers = totalCustomers;
     },
     setCustomerToModify: (state, action) => {
-      console.log(action.payload);
       const customerToModify = action.payload;
       state.customerToModify = customerToModify;
+    },
+    setCustomerSearch: (state, action) => {
+      state.search = action.payload;
     },
   },
 });
 
-export const { setCustomers, setCustomerToModify } = customersSlice.actions;
+export const { setCustomers, setCustomerToModify, setCustomerSearch } =
+  customersSlice.actions;
 export default customersSlice.reducer;
 
 //Selectors
@@ -33,3 +37,4 @@ export const selectNumOfPages = (state) => state.customers.numOfPages;
 export const selectTotalCustomers = (state) => state.customers.totalCustomers;
 export const selectCustomerToModify = (state) =>
   state.customers.customerToModify;
+export const selectCustomerSearch = (state) => state.customers.customerSearch;
