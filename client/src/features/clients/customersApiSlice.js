@@ -16,6 +16,12 @@ export const customersApiSlice = apiSlice.injectEndpoints({
         } catch (err) {}
       },
     }),
+    getCustomerById: builder.query({
+      query: (id) => ({
+        url: `/customer/${id}`,
+      }),
+      providesTags: ["Customers"],
+    }),
     addCustomer: builder.mutation({
       query: (customer) => ({
         url: "/customer",
@@ -40,4 +46,5 @@ export const {
   useAddCustomerMutation,
   useDeleteCustomerMutation,
   useLazyGetAllCustomersQuery,
+  useLazyGetCustomerByIdQuery,
 } = customersApiSlice;

@@ -57,6 +57,17 @@ const getCustomers = async (req, res) => {
   res.status(StatusCodes.OK).json({ customers, totalCustomers, numOfPages });
 };
 
+const getCustomerById = async (req, res) => {
+  const { id: customerId } = req.params;
+
+  const customer = await Customer.findOne({ _id: customerId });
+  if (!customer) {
+    throw new NotFoundError(`No customer with id: ${customerId}`);
+  }
+
+  res.status(StatusCodes.OK).json({ customer });
+};
+
 const updateCustomer = async (req, res) => {
   const { id: customerId } = req.params;
   const { name, lastname, address, city, rfc, phoneNumber, email } = req.body;
@@ -92,4 +103,10 @@ const deleteCustomer = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: "Customer deleted successfully" });
 };
 
-export { addClient, getCustomers, updateCustomer, deleteCustomer };
+export {
+  addClient,
+  getCustomers,
+  updateCustomer,
+  deleteCustomer,
+  getCustomerById,
+};

@@ -5,6 +5,7 @@ import Login from "./features/auth/Login";
 import PersistLogin from "./features/auth/PersistLogin";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
 import Customers from "./features/clients/Customers";
+import CustomerProfile from "./features/customerProfile/CustomerProfile";
 import Dashboard from "./features/dashboard/Dashboard";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<SharedLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="/customers" element={<Customers />} />
+              <Route path="/customer/:id" element={<CustomerProfile />} />
             </Route>
           </Route>
         </Route>

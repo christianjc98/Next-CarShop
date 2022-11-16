@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { TableContainer } from "../../assets/wrappers/components/Table";
 import { setCustomerToModify } from "./customersSlice";
 
@@ -27,8 +28,11 @@ const Table = ({ data, columnNames, setOpenModal }) => {
         {data.map((item, index) => {
           return (
             <tr key={index}>
-              <td>{item.name}</td>
-              <td>{item.lastname}</td>
+              <td>
+                <Link to={`/customer/${item._id}`}>
+                  {item.name} {item.lastname}
+                </Link>
+              </td>
               <td>{item.phoneNumber}</td>
               <td>{item.address}</td>
               <td>{item.city}</td>

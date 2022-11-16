@@ -32,7 +32,6 @@ const Customers = () => {
 
   const columnNames = [
     "Nombre",
-    "Apellido",
     "Telefono",
     "Dirección",
     "Ciudad",
