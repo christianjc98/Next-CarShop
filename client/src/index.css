@@ -153,6 +153,10 @@ img {
   display: inline-block;
 }
 
+.delete-btn {
+  background-color: #d9534f;
+}
+
 .full-page {
   min-height: 100vh;
 }

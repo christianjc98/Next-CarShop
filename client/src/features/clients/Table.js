@@ -37,7 +37,7 @@ const Table = ({ data, columnNames, setOpenModal }) => {
               <td>
                 <div className="actions">
                   <button
-                    className="delete-btn"
+                    className="delete-btn btn"
                     onClick={() => handleCustomerDelete(item)}
                   >
                     Delete
