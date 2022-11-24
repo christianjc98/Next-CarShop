@@ -1,11 +1,8 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-export const useForm = (initialForm, validateForm, apiCall, setOpenModal) => {
+export const useForm = (initialForm, validateForm) => {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,40 +14,16 @@ export const useForm = (initialForm, validateForm, apiCall, setOpenModal) => {
     setErrors(validateForm(form));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleErrors = async () => {
     setErrors(validateForm(form));
-    if (Object.keys(errors).length === 0) {
-      setLoading(true);
-      try {
-        const response = await apiCall(form);
-        setLoading(false);
-        setResponse(true);
-        setForm(initialForm);
-
-        setTimeout(() => {
-          setResponse(false);
-        }, 5000);
-        console.log(response);
-
-        if (response.data.status === 201) {
-          setOpenModal(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      return;
-    }
   };
 
   return {
     form,
     errors,
-    loading,
-    response,
     handleChange,
     handleBlur,
-    handleSubmit,
+    handleErrors,
+    setForm,
   };
 };

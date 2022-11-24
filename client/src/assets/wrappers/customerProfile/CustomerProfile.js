@@ -50,3 +50,5 @@ export const ProfileTabs = styled.div`
   margin-top: 1rem;
   background-color: #1c6ea4;
 `;
+
+export const TabsInfoContainer = styled.div``;

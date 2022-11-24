@@ -2,18 +2,23 @@ import {
   Container,
   Navbar,
   ProfileTabs,
+  TabsInfoContainer,
 } from "../../assets/wrappers/customerProfile/CustomerProfile";
-import { Outlet, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useLazyGetCustomerByIdQuery } from "../clients/customersApiSlice";
 import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 import { GrLocation, GrDocument } from "react-icons/gr";
 import { FaCity } from "react-icons/fa";
 import Tabs from "../../components/Tabs";
+import BasicInformation from "./BasicInformation";
 
 const CustomerProfile = () => {
   const { id } = useParams();
   const [getCustomerById, { data, isLoading }] = useLazyGetCustomerByIdQuery();
+  const [basicInfoTab, setBasicInfoTab] = useState(true);
+  const [carsTab, setCarsTab] = useState(false);
+  const [ordersTab, setOrdersTab] = useState(false);
 
   useEffect(() => {
     getCustomerById(id);
@@ -22,7 +27,6 @@ const CustomerProfile = () => {
   let content;
   if (data) {
     const customer = data.customer;
-    console.log(customer);
     content = (
       <>
         <div className="header">
@@ -73,11 +77,10 @@ const CustomerProfile = () => {
       </>
     );
   }
-
   const tabs = [
-    { name: "Información", mapping: "/info" },
-    { name: "Coches", mapping: "/coches" },
-    { name: "Historial de ordenes", mapping: "/historial" },
+    { name: "Información", onClick: setBasicInfoTab, show: basicInfoTab },
+    { name: "Coches", onClick: setCarsTab, show: carsTab },
+    { name: "Historial de ordenes", onClick: setOrdersTab, show: ordersTab },
   ];
   return (
     <Container>
@@ -85,7 +88,13 @@ const CustomerProfile = () => {
       <ProfileTabs>
         <Tabs tabsInfo={tabs} />
       </ProfileTabs>
-      <Outlet />
+      <TabsInfoContainer>
+        {basicInfoTab && data ? (
+          <BasicInformation customer={data.customer} />
+        ) : (
+          <p>Hola</p>
+        )}
+      </TabsInfoContainer>
     </Container>
   );
 };

@@ -34,7 +34,6 @@ const Table = ({ data, columnNames, setOpenModal }) => {
                 </Link>
               </td>
               <td>{item.phoneNumber}</td>
-              <td>{item.address}</td>
               <td>{item.city}</td>
               <td>{item.rfc}</td>
               <td>{item.email}</td>

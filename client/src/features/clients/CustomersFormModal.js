@@ -41,13 +41,28 @@ const CustomersFormModal = ({ openModal, setOpenModal }) => {
     return errors;
   };
 
-  const [addNewCustomer, result] = useAddCustomerMutation();
-  const { form, errors, handleChange, handleSubmit, handleBlur } = useForm(
-    initialForm,
-    validationsForm,
-    addNewCustomer,
-    setOpenModal
-  );
+  const [addNewCustomer] = useAddCustomerMutation();
+  const { form, errors, handleChange, handleErrors, handleBlur, setForm } =
+    useForm(initialForm, validationsForm);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    handleErrors();
+    if (Object.keys(errors).length === 0) {
+      try {
+        const response = await addNewCustomer(form);
+        setForm(initialForm);
+        if (response.data.status === 201) {
+          setOpenModal(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      return;
+    }
+  };
+
   return (
     <Modal
       openModal={openModal}

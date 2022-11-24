@@ -38,6 +38,14 @@ export const customersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Customers"],
     }),
+    editCustomer: builder.mutation({
+      query: ({ customer, id }) => ({
+        url: `/customer/${id}`,
+        method: "PATCH",
+        body: customer,
+      }),
+      invalidatesTags: ["Customers"],
+    }),
   }),
 });
 
@@ -47,4 +55,5 @@ export const {
   useDeleteCustomerMutation,
   useLazyGetAllCustomersQuery,
   useLazyGetCustomerByIdQuery,
+  useEditCustomerMutation,
 } = customersApiSlice;

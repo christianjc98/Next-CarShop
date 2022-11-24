@@ -1,19 +1,24 @@
-import { NavLink } from "react-router-dom";
 import { Container } from "../assets/wrappers/components/Tabs";
 
 const Tabs = ({ tabsInfo }) => {
+  const setFalse = () => {
+    tabsInfo.forEach((element) => {
+      element.onClick(false);
+    });
+  };
   return (
     <Container>
       {tabsInfo.map((item, index) => {
         return (
-          <NavLink
+          <button
             key={index}
-            to={item.mapping}
-            className={({ isActive }) => (isActive ? "link-active" : undefined)}
-            end
+            onClick={() => {
+              setFalse();
+              item.onClick(true);
+            }}
           >
             {item.name}
-          </NavLink>
+          </button>
         );
       })}
     </Container>
