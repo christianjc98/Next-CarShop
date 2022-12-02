@@ -12,6 +12,7 @@ import { GrLocation, GrDocument } from "react-icons/gr";
 import { FaCity } from "react-icons/fa";
 import Tabs from "../../components/Tabs";
 import BasicInformation from "./BasicInformation";
+import CarsTab from "./CarsTab";
 
 const CustomerProfile = () => {
   const { id } = useParams();
@@ -89,11 +90,8 @@ const CustomerProfile = () => {
         <Tabs tabsInfo={tabs} />
       </ProfileTabs>
       <TabsInfoContainer>
-        {basicInfoTab && data ? (
-          <BasicInformation customer={data.customer} />
-        ) : (
-          <p>Hola</p>
-        )}
+        {basicInfoTab && data && <BasicInformation customer={data.customer} />}
+        {carsTab && data && <CarsTab />}
       </TabsInfoContainer>
     </Container>
   );

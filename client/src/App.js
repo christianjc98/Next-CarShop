@@ -5,8 +5,8 @@ import Login from "./features/auth/Login";
 import PersistLogin from "./features/auth/PersistLogin";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
 import Customers from "./features/clients/Customers";
-import BasicInformation from "./features/customerProfile/BasicInformation";
-import CustomerProfile from "./features/customerProfile/CustomerProfile";
+import BasicInformation from "./features/clients/BasicInformation";
+import CustomerProfile from "./features/clients/CustomerProfile";
 import Dashboard from "./features/dashboard/Dashboard";
 
 function App() {

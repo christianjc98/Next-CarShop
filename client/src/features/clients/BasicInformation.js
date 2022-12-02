@@ -1,7 +1,7 @@
 import { Container } from "../../assets/wrappers/customerProfile/BasicInformation";
 import FormRow from "../../components/FormRow";
 import { useForm } from "../../utils/hooks/useForm";
-import { useEditCustomerMutation } from "../clients/customersApiSlice";
+import { useEditCustomerMutation } from "./customersApiSlice";
 
 const BasicInformation = ({ customer }) => {
   const initialForm = {
@@ -140,7 +140,7 @@ const BasicInformation = ({ customer }) => {
           <p className="input-error">{errors.phoneNumber}</p>
         )}
         <button className="btn" type="submit">
-          Add
+          Guardar
         </button>
       </form>
     </Container>

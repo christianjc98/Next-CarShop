@@ -11,6 +11,7 @@ import connectDB from "./db/connect.js";
 //routers
 import authRouter from "./routes/authRoutes.js";
 import customerRouter from "./routes/customerRoutes.js";
+import carRouter from "./routes/carRoutes.js";
 
 //middleware
 import notFoundMiddleware from "./middleware/not-found.js";
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/customer", authMiddleware, customerRouter);
+app.use("/api/v1/car", authMiddleware, carRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

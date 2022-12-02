@@ -1,4 +1,5 @@
 import express from "express";
+import { getAllCarsByCustomerId } from "../controllers/carController.js";
 import {
   addClient,
   deleteCustomer,
@@ -14,5 +15,7 @@ router
   .patch(updateCustomer)
   .delete(deleteCustomer)
   .get(getCustomerById);
+
+router.route("/:id/cars").get(getAllCarsByCustomerId);
 
 export default router;
